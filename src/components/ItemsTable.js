@@ -33,7 +33,7 @@ function ItemsTable() {
   // Airtable APIs
   // Airtable Get All Items
   const getItemsAirtable = async () => {
-    axios.get("http://localhost:8000/view", { crossdomain: true }).then(response => {
+    axios.get(`${process.env.NEXT_PUBLIC_BACKEND_API}/view`, { crossdomain: true }).then(response => {
       const items = response.data.records.map(item => {
         return {
           ID: item.id,
@@ -56,7 +56,7 @@ function ItemsTable() {
 
   // Airtable Add
   const addItemAirtable = async (newItem) => {
-    axios.post("http://localhost:8000/add", newItem, { crossdomain: true, "Content-Type": "application/json" }).then(response => {
+    axios.post(`${process.env.NEXT_PUBLIC_BACKEND_API}/add`, newItem, { crossdomain: true, "Content-Type": "application/json" }).then(response => {
       getItemsAirtable();
     }).catch(error => {
       console.log(error);
@@ -65,7 +65,7 @@ function ItemsTable() {
 
   // Airtable Update
   const updateItemAirtable = async (id, updatedItem) => {
-    axios.post("http://localhost:8000/update", { id: id, updatedItem: updatedItem }, { crossdomain: true }).then(response => {
+    axios.post(`${process.env.NEXT_PUBLIC_BACKEND_API}/update`, { id: id, updatedItem: updatedItem }, { crossdomain: true }).then(response => {
       console.log('Update Successful');
     }).catch(error => {
       console.log(error);
@@ -74,7 +74,7 @@ function ItemsTable() {
 
   // Airtable Delete
   const deleteItemAirtable = async (id) => {
-    axios.post("http://localhost:8000/delete", { id: id }, { crossdomain: true }).then(response => {
+    axios.post(`${process.env.NEXT_PUBLIC_BACKEND_API}/delete`, { id: id }, { crossdomain: true }).then(response => {
       console.log('Delete Successful');
     }).catch(error => {
       console.log(error);
